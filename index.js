@@ -14,8 +14,14 @@ app.get("/", (req, res) => {
 });
 
 app.post("/compile", async (req, res) => {
-  const result = await compiler(req.body.code);  
-  res.json(result);
+  const lang = req.body.lang
+
+  if (lang !== "c" && lang !== "cpp" && lang !== "node" && lang !== "py" && lang !== "java") {
+    return res.status(400).json({ error: "Bad format" })
+  }
+
+  const result = await compiler(req.body.code, lang, req.body.input);  
+  return res.json(result);
 });
 
 app.listen(PORT, (err) => {
