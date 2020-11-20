@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors")
 
 const { compiler } = require("./handlers/compiler");
 
@@ -8,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
+app.use(cors())
 
 app.get("/", (req, res) => {
   res.send("Go to this path /compile");
