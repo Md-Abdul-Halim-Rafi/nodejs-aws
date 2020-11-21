@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors")
 
 const { compiler } = require("./handlers/compiler");
+const glotRouter = require("./handlers/glot/glotRouter");
 
 const app = express();
 
@@ -10,6 +11,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(cors())
+
+app.use("/run", glotRouter)
 
 app.get("/", (req, res) => {
   res.send("Go to this path /compile");
